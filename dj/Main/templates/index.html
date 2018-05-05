@@ -8,7 +8,18 @@
     <link rel="stylesheet" type="text/css" href="{% static "index.css" %}">
 </head>
 <body>
-    <div class="menu">hello</div>
-    <div class="content">friend</div>
+    <div class="menu">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+    <div class="content">
+        {% for image in images %}
+            <img src={% static image %}>
+        {% endfor %}
+        {{ text }}
+    </div>
 </body>
 </html>
