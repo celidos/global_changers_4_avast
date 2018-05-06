@@ -1,18 +1,48 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #c6cad1;
 }
 
-.menu {
-    width: 20%;
-    margin: 0;
+.col {
+    width: 10%;
     padding: 0;
     float: left;
-    background-color: #000;
+    margin: 20px 0 0;
+}
+
+/*.border {*/
+    /*width: 5%;*/
+    /*padding: 0;*/
+    /*float: left;*/
+    /*margin: 20px 0 0;*/
+/*}*/
+
+/*.center {*/
+    /*margin: 0;*/
+    /*width: 90%;*/
+    /*float: left;*/
+/*}*/
+
+.menu {
+
 }
 
 .content {
     margin: 0;
     width: 80%;
     float: left;
+}
+
+.canvas {
+    margin-top: 20px;
+    background-color: white;
+    border-top: outset darkgrey;
+    border-right: outset darkgrey;
+    border-left: outset darkgrey;
+}
+
+img {
+    width: 90%;
+    margin-left: 5%;
 }

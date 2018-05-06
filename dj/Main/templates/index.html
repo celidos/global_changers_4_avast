@@ -8,18 +8,29 @@
     <link rel="stylesheet" type="text/css" href="{% static "index.css" %}">
 </head>
 <body>
-    <div class="menu">
+    <div class="col">
+        <div class="menu">
         <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Submit" />
         </form>
+        </div>
     </div>
+
     <div class="content">
+    <div class="canvas">
+
         {% for image in images %}
             <img src={% static image %}>
         {% endfor %}
         {{ text }}
+
+    </div>
+    </div>
+
+    <div class="col">
+
     </div>
 </body>
 </html>

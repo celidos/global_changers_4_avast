@@ -38,6 +38,7 @@ def main(request):
 
             form = ParamForm()
             images.append('total_by_protocol.png')
+            images.append('1.jpeg')
 
     else:
         form = ParamForm()
