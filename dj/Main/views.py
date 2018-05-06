@@ -4,6 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+from Main.scripts import call_all_funcs
+from settings.settings import BASE_DIR
+
 
 def total_hist_by_protocol(data, save_to_file=False):
     grouped_by_protocol = data.groupby(['Protocol'])['No.'].count().sort_values()
@@ -24,36 +27,25 @@ def total_hist_by_protocol(data, save_to_file=False):
     return "TEXT"
 
 
-class ImgText:
-    def __init__(self, img, text, is_table, table_title = None, table=None):
-        self.img = img
-        self.text = text
-        self.is_table = is_table
-        self.table_title = table_title
-        self.table = table
-
-
 def main(request):
     images = []
-    text = ""
     if request.method == 'POST':
         form = ParamForm(request.POST)
         if form.is_valid():
             form_dataset = form.cleaned_data['data']
-            if form_dataset == "1":
-                print(form_dataset)
-                data = pd.read_csv('Sality_data.csv', error_bad_lines=False, nrows=450000)
-                text = total_hist_by_protocol(data, True)
-
+            data = pd.read_csv(BASE_DIR + '/datasets/' + form_dataset, error_bad_lines=False, nrows=450000)
+            # text = total_hist_by_protocol(data, True)
+            print("name", form_dataset.split('_')[0])
+            images = call_all_funcs(data, form_dataset.split('_')[0])
             form = ParamForm()
-            img = ImgText('total_by_protocol.png', 'text', True, ["aasdgsd", "bb", "cc"], [[1, 2, 3], [2, 3, 4]])
-            images.append(img)
-            img = ImgText('1.jpeg', 'TEXT2', False)
-            images.append(img)
-            # images.append('total_by_protocol.png')
-            # images.append('1.jpeg')
+
+            # img = ImgText(**{'title': 'first graph', 'img': 'total_by_protocol.png', 'text': 'here\'s the text',
+            #                  'table_title': ["aasdgsd", "bb", "cc"], 'table': [[1, 2, 3], [2, 3, 4]]})
+            # images.append(img)
+            # img = ImgText(**{'title': 'second graph', 'img': '1.jpeg'})
+            # images.append(img)
 
     else:
         form = ParamForm()
 
-    return render(request, 'index.html', {'form': form, 'images': images, 'text': text})
+    return render(request, 'index.html', {'form': form, 'images': images})

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Avast statistics</title>
     <link rel="stylesheet" type="text/css" href="{% static "index.css" %}">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 </head>
 <body>
     <div class="col">
@@ -22,38 +22,48 @@
     <div class="content">
         {% for image in images %}
             <div class="canvas">
-            <div class="img-container">
-                <img src={% static image.img %}>
-            </div>
-            <div class="text-container">
-                <div class="row">
-                    {{ image.text }}
-                </div>
-                <div class="row">
-                {% if image.is_table %}
-                    <table>
-                        <tr>
-                        {% for el in image.table_title %}
-                            <th>{{ el }}</th>
-                        {% endfor %}
-                        </tr>
-                        {% for row in image.table %}
-                            <tr>
-                                {% for el in row %}
-                                    <td>{{ el }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    </table>
+                {% if image.title != "" %}
+                    <div class="text-container">
+                    <div class="row">
+                        <h2>{{ image.title }}</h2>
+                    </div>
+                    </div>
                 {% endif %}
-                </div>
+
+                {% if image.img != "" %}
+                    <div class="img-container">
+                        <img src={% static image.img %}>
+                    </div>
+                {% endif %}
+
+            <div class="text-container">
+                {% if image.text != "" %}
+                    <div class="row">
+                    <h3>{{ image.text }}</h3>
+                    </div>
+                {% endif %}
+
+                {% if image.table != "" %}
+                    <div class="row">
+                        <table>
+                            <tr>
+                            {% for el in image.table_title %}
+                                <th>{{ el }}</th>
+                            {% endfor %}
+                            </tr>
+                            {% for row in image.table %}
+                                <tr>
+                                    {% for el in row %}
+                                        <td>{{ el }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
             </div>
             </div>
         {% endfor %}
-
-        <div class="canvas">
-            {{ text }}
-        </div>
     </div>
 
     <div class="col">
