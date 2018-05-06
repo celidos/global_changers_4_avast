@@ -24,6 +24,15 @@ def total_hist_by_protocol(data, save_to_file=False):
     return "TEXT"
 
 
+class ImgText:
+    def __init__(self, img, text, is_table, table_title = None, table=None):
+        self.img = img
+        self.text = text
+        self.is_table = is_table
+        self.table_title = table_title
+        self.table = table
+
+
 def main(request):
     images = []
     text = ""
@@ -37,8 +46,12 @@ def main(request):
                 text = total_hist_by_protocol(data, True)
 
             form = ParamForm()
-            images.append('total_by_protocol.png')
-            images.append('1.jpeg')
+            img = ImgText('total_by_protocol.png', 'text', True, ["aasdgsd", "bb", "cc"], [[1, 2, 3], [2, 3, 4]])
+            images.append(img)
+            img = ImgText('1.jpeg', 'TEXT2', False)
+            images.append(img)
+            # images.append('total_by_protocol.png')
+            # images.append('1.jpeg')
 
     else:
         form = ParamForm()

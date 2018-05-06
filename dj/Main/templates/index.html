@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Avast statistics</title>
     <link rel="stylesheet" type="text/css" href="{% static "index.css" %}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 <body>
     <div class="col">
@@ -19,14 +20,40 @@
     </div>
 
     <div class="content">
-    <div class="canvas">
-
         {% for image in images %}
-            <img src={% static image %}>
+            <div class="canvas">
+            <div class="img-container">
+                <img src={% static image.img %}>
+            </div>
+            <div class="text-container">
+                <div class="row">
+                    {{ image.text }}
+                </div>
+                <div class="row">
+                {% if image.is_table %}
+                    <table>
+                        <tr>
+                        {% for el in image.table_title %}
+                            <th>{{ el }}</th>
+                        {% endfor %}
+                        </tr>
+                        {% for row in image.table %}
+                            <tr>
+                                {% for el in row %}
+                                    <td>{{ el }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+                </div>
+            </div>
+            </div>
         {% endfor %}
-        {{ text }}
 
-    </div>
+        <div class="canvas">
+            {{ text }}
+        </div>
     </div>
 
     <div class="col">
